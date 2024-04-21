@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.5</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>API-JeuxOlympiques</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>API-JeuxOlympiques</name>
+	<description>A l&apos;arrivée des jeux olympiques, on souhaite créer une API nous permettant de gérer la billetterie des jeux. On souhaite pouvoir s&apos;inscrire à telle ou telle épreuve en tant que spectateur grâce à l&apos;api. Depuis l&apos;api, l&apos;utilisateur peut se connecter et acheter des billets pour lui-même ou pour un groupe de personne. S&apos;il achète ses billets par lot, une promotion est appliquée. L&apos;utilisateur connecté a accès à l&apos;historique de ses commandes. L&apos;administrateur peut fermer ou ouvrir la réservation d&apos;une épreuve, ajouter des billets, reporter un événement et annuler un événement. Une épreuve a lieu dans un stade, et elle ne peut pas avoir lieu si une autre épreuve est déjà prévue dans celui-ci. Si un événement est annulé, une ristourne est faite à toute personne qui a acheté un billet pour cet événement. Tout ajout de logique et règle métier sera le bienvenu.</description>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
