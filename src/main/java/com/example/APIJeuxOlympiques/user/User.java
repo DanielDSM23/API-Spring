@@ -1,5 +1,7 @@
 package com.example.APIJeuxOlympiques.user;
 
+
+import com.example.APIJeuxOlympiques.ticket.Ticket;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -33,8 +35,8 @@ public class User {
     }
 
 
-    //@OneToMany(mappedBy = "user")
-    //private List<Ticket> tickets;
+    @OneToMany(mappedBy = "user")
+    private List<Ticket> tickets;
     public Long getId() {
         return id;
     }
