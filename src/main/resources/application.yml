@@ -1,0 +1,22 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  security:
+    user:
+      name: TEST
+      password: 12345
+  datasource:
+    password: root
+    url: jdbc:mysql://localhost:8889/apijo
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    show-sql: true

@@ -1,82 +1,77 @@
 package com.example.APIJeuxOlympiques.user;
 
-
-import com.example.APIJeuxOlympiques.ticket.Ticket;
 import jakarta.persistence.*;
-
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import com.example.APIJeuxOlympiques.ticket.Ticket;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-@Entity
-public class User {
-    public User(Long id, String fullName, String email, String password, String role) {
-        this.id = id;
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
-    public User() {
 
-    }
+
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
     private Long id;
     private String fullName;
     private String email;
     private String password;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
+    @OneToMany(mappedBy = "user")
+    private List<Ticket> tickets;
 
 
-
-    public User(String fullName, String email, String password, String role) {
+    public User(String fullName, String email, String password, UserRole userRole, List<Ticket> tickets) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.userRole = userRole;
+        this.tickets = tickets;
     }
 
-
-    @OneToMany(mappedBy = "user")
-    private List<Ticket> tickets;
-    public Long getId() {
-        return id;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole.name());
+        return Collections.singleton(authority);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    @Override
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String getUsername() {
+        return email;
     }
 
-    public String getRole() {
-        return role;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
-
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
