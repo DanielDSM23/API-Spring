@@ -8,7 +8,7 @@ server:
 security:
   jwt:
     secret-key: "88cd2108b5347d973cf39cdf9053d7dd42704876d8c9a9bd8e2d168259d3ddf7"
-    expiration-time: 10
+    expiration-time: 1000000000
 
 
 spring:
@@ -22,7 +22,7 @@ spring:
     username: root
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect

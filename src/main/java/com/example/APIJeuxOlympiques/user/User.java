@@ -8,9 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.example.APIJeuxOlympiques.ticket.Ticket;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+
+import java.util.*;
 
 
 @Getter
@@ -39,8 +38,13 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole.name());
-        return Collections.singleton(authority);
+        Set<UserRole> roles = Set.of(userRole);
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        for (UserRole userRole : roles) {
+            authorities.add(new SimpleGrantedAuthority(userRole.name()));
+        }
+        return authorities;
     }
 
     @Override
