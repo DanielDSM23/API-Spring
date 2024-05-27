@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/ticket")
+@RequestMapping("hello")
 public class TicketController {
     private final TicketService ticketService;
     @Autowired

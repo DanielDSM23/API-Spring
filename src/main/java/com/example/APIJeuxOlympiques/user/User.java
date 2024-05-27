@@ -19,9 +19,9 @@ import java.util.List;
 @Entity
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false)
-    private Long id;
+    private String id;
     private String fullName;
     private String email;
     private String password;
@@ -30,13 +30,11 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Ticket> tickets;
 
-
-    public User(String fullName, String email, String password, UserRole userRole, List<Ticket> tickets) {
+    public User(String fullName, String email, String password, UserRole userRole) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
         this.userRole = userRole;
-        this.tickets = tickets;
     }
 
     @Override
