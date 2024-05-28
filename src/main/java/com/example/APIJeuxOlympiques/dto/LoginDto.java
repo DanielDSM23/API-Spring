@@ -1,5 +1,6 @@
 package com.example.APIJeuxOlympiques.dto;
 
+
 public class LoginDto {
     private String mail;
     private String password;

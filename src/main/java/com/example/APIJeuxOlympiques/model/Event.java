@@ -18,6 +18,7 @@ public class Event {
     private LocalDateTime endDate;
     private Boolean status;
     private String place;
+    private Double price;
 
     public Event(String eventName, LocalDateTime beginDate, LocalDateTime endDate, Boolean status, String place) {
         this.eventName = eventName;

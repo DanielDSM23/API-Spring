@@ -28,22 +28,20 @@ public class Ticket {
 
 
     private Integer quantity;
-    private Float unitPrice;
-
-    private Boolean status;
 
     private LocalDateTime date;
+
+    private Double finalPrice;
 
 
     public Ticket() {}
 
-    public Ticket(Event event, User user, Integer quantity, Float unitPrice, Boolean status, LocalDateTime date) {
+    public Ticket(Event event, User user, Integer quantity, LocalDateTime date, Double finalPrice) {
         this.event = event;
         this.user = user;
         this.quantity = quantity;
-        this.unitPrice = unitPrice;
-        this.status = status;
         this.date = date;
+        this.finalPrice = finalPrice;
     }
 
 }
