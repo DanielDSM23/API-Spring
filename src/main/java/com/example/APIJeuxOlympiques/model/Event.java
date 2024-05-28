@@ -1,4 +1,4 @@
-package com.example.APIJeuxOlympiques.event;
+package com.example.APIJeuxOlympiques.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

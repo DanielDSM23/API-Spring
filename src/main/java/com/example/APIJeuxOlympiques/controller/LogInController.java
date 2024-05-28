@@ -1,7 +1,9 @@
-package com.example.APIJeuxOlympiques.user.register;
+package com.example.APIJeuxOlympiques.controller;
 
 
-import com.example.APIJeuxOlympiques.user.UserService;
+import com.example.APIJeuxOlympiques.response.SignInResponse;
+import com.example.APIJeuxOlympiques.service.UserService;
+import com.example.APIJeuxOlympiques.dto.LoginDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogInController {
     private UserService userService;
     @PostMapping
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto){
+    public ResponseEntity<SignInResponse> login(@RequestBody LoginDto loginDto){
         return userService.login(loginDto);
     }
 

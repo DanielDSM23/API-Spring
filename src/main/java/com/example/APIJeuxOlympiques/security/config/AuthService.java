@@ -1,10 +1,10 @@
 package com.example.APIJeuxOlympiques.security.config;
 
-import com.example.APIJeuxOlympiques.user.User;
-import com.example.APIJeuxOlympiques.user.UserRepository;
-import com.example.APIJeuxOlympiques.user.UserRole;
-import com.example.APIJeuxOlympiques.user.register.LoginDto;
-import com.example.APIJeuxOlympiques.user.register.RegistrationRequest;
+import com.example.APIJeuxOlympiques.model.User;
+import com.example.APIJeuxOlympiques.repository.UserRepository;
+import com.example.APIJeuxOlympiques.model.UserRole;
+import com.example.APIJeuxOlympiques.dto.LoginDto;
+import com.example.APIJeuxOlympiques.dto.RegistrationRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

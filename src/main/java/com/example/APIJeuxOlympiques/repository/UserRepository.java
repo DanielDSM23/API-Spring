@@ -1,5 +1,6 @@
-package com.example.APIJeuxOlympiques.user;
+package com.example.APIJeuxOlympiques.repository;
 
+import com.example.APIJeuxOlympiques.model.User;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

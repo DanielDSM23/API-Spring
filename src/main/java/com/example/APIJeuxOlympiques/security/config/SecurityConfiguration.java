@@ -1,6 +1,6 @@
 package com.example.APIJeuxOlympiques.security.config;
 
-import com.example.APIJeuxOlympiques.user.UserRepository;
+import com.example.APIJeuxOlympiques.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

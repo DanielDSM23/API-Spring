@@ -1,4 +1,4 @@
-package com.example.APIJeuxOlympiques.ticket;
+package com.example.APIJeuxOlympiques.service;
 
 
 import org.springframework.stereotype.Service;

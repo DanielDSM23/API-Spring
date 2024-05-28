@@ -1,6 +1,9 @@
-package com.example.APIJeuxOlympiques.user.register;
+package com.example.APIJeuxOlympiques.controller;
 
 
+import com.example.APIJeuxOlympiques.dto.RegistrationRequest;
+import com.example.APIJeuxOlympiques.response.RegisterResponse;
+import com.example.APIJeuxOlympiques.service.RegistrationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +19,7 @@ public class RegistrationController {
     private RegistrationService registrationService;
 
     @PostMapping
-    public ResponseEntity<String> register(@RequestBody RegistrationRequest request){
+    public ResponseEntity<RegisterResponse> register(@RequestBody RegistrationRequest request){
         return registrationService.register(request);
     }
 

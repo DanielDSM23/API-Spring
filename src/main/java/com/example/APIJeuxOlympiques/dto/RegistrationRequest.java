@@ -1,4 +1,4 @@
-package com.example.APIJeuxOlympiques.user.register;
+package com.example.APIJeuxOlympiques.dto;
 
 
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class RegistrationRequest {
-    String fullName;
-    String email;
-    String password;
+    private String fullName;
+    private String email;
+    private String password;
 }

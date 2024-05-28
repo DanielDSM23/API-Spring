@@ -1,7 +1,7 @@
-package com.example.APIJeuxOlympiques.ticket;
+package com.example.APIJeuxOlympiques.controller;
 
 
-import com.example.APIJeuxOlympiques.user.UserService;
+import com.example.APIJeuxOlympiques.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

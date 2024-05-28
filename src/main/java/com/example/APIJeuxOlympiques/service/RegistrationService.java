@@ -1,9 +1,11 @@
-package com.example.APIJeuxOlympiques.user.register;
+package com.example.APIJeuxOlympiques.service;
 
 
-import com.example.APIJeuxOlympiques.user.User;
-import com.example.APIJeuxOlympiques.user.UserRole;
-import com.example.APIJeuxOlympiques.user.UserService;
+import com.example.APIJeuxOlympiques.dto.RegistrationRequest;
+import com.example.APIJeuxOlympiques.model.User;
+import com.example.APIJeuxOlympiques.model.UserRole;
+import com.example.APIJeuxOlympiques.response.RegisterResponse;
+import com.example.APIJeuxOlympiques.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class RegistrationService {
 
     private final UserService userService;
-    public ResponseEntity<String> register(RegistrationRequest request){
+    public ResponseEntity<RegisterResponse> register(RegistrationRequest request){
         return userService.signUp(new User(
                 request.getFullName(),
                 request.getEmail(),

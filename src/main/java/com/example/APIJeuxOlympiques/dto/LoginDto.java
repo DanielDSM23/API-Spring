@@ -1,8 +1,8 @@
-package com.example.APIJeuxOlympiques.user.register;
+package com.example.APIJeuxOlympiques.dto;
 
 public class LoginDto {
-    String mail;
-    String password;
+    private String mail;
+    private String password;
 
     public void setMail(String mail) {
         this.mail = mail;

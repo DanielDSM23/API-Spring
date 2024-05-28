@@ -1,7 +1,5 @@
-package com.example.APIJeuxOlympiques.ticket;
+package com.example.APIJeuxOlympiques.model;
 
-import com.example.APIJeuxOlympiques.event.Event;
-import com.example.APIJeuxOlympiques.user.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
