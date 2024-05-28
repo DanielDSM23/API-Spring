@@ -15,6 +15,7 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "user")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -25,8 +26,8 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
-    @OneToMany(mappedBy = "user")
-    private List<Ticket> tickets;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Ticket> tickets;
 
     public User(String fullName, String email, String password, UserRole userRole) {
         this.fullName = fullName;
