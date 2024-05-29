@@ -1,42 +1,34 @@
 package com.example.APIJeuxOlympiques.controller;
 
-
-import com.example.APIJeuxOlympiques.dto.GetTicketsDto;
-import com.example.APIJeuxOlympiques.dto.OrderTicketDto;
 import com.example.APIJeuxOlympiques.model.Ticket;
-import com.example.APIJeuxOlympiques.model.User;
-import com.example.APIJeuxOlympiques.response.OrderResponse;
-import com.example.APIJeuxOlympiques.response.RegisterResponse;
 import com.example.APIJeuxOlympiques.service.TicketService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/ticket")
+@RequestMapping("/api/ticket")
+@AllArgsConstructor
 public class TicketController {
+
     private final TicketService ticketService;
-    @Autowired
-    private TicketController(TicketService ticketService){
-        this.ticketService = ticketService;
-    }
 
     @PostMapping
-    public ResponseEntity<OrderResponse> orderTicket(@RequestBody OrderTicketDto orderTicketDto){
-        return ticketService.addOrder(orderTicketDto);
+    public ResponseEntity<?> createTicket(@RequestParam String eventId, @RequestParam String userId,
+                                          @RequestParam int quantity, @RequestParam Double finalPrice) {
+        return ticketService.createTicket(eventId, userId, quantity, finalPrice);
     }
 
-    @GetMapping("/tickets")
-    public List<Ticket> getAllTicket(){
-        return ticketService.getAllOrders();
+    @GetMapping
+    public List<Ticket> getAllTickets() {
+        return ticketService.getAllTickets();
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> deleteTicket(@RequestBody OrderTicketDto orderTicketDto){
-        return ticketService.deleteOrder(orderTicketDto.getId_ticket());
+    @DeleteMapping("/{ticketId}")
+    public ResponseEntity<?> deleteTicket(@PathVariable String ticketId) {
+        return ticketService.deleteTicket(ticketId);
     }
-
-
 }
