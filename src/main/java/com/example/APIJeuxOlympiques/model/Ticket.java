@@ -29,8 +29,6 @@ public class Ticket {
 
     private Event event;
 
-
-
     private Integer quantity;
 
     private LocalDateTime date;

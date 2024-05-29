@@ -9,4 +9,5 @@ import lombok.Setter;
 public class GetTicketsDto {
 
     private String id_user;
+    private String id_event;
 }
