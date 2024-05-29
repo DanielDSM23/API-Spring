@@ -1,6 +1,8 @@
 package com.example.APIJeuxOlympiques.controller;
 
+import com.example.APIJeuxOlympiques.dto.OrderTicketDto;
 import com.example.APIJeuxOlympiques.model.Ticket;
+import com.example.APIJeuxOlympiques.response.OrderResponse;
 import com.example.APIJeuxOlympiques.service.TicketService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,9 +19,8 @@ public class TicketController {
     private final TicketService ticketService;
 
     @PostMapping
-    public ResponseEntity<?> createTicket(@RequestParam String eventId, @RequestParam String userId,
-                                          @RequestParam int quantity, @RequestParam Double finalPrice) {
-        return ticketService.createTicket(eventId, userId, quantity, finalPrice);
+    public ResponseEntity<OrderResponse> orderTicket(@RequestBody OrderTicketDto orderTicketDto){
+        return ticketService.orderTicket(orderTicketDto);
     }
 
     @GetMapping
