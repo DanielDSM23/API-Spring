@@ -33,7 +33,7 @@ public class EventController {
         return eventService.getAllEvents();
     }
 
-    @PutMapping
+    @PutMapping("{id}")
     public Event updateEvent(@PathVariable String id, @RequestBody Event event){
         return eventService.updateEvent(id, event);
     }
