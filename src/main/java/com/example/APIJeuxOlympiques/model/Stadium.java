@@ -1,10 +1,14 @@
 package com.example.APIJeuxOlympiques.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
 @Table(name = "stadium")
+@Getter
+@Setter
 public class Stadium {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

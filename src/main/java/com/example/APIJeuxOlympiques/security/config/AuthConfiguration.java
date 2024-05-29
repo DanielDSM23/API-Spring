@@ -38,6 +38,7 @@ public class AuthConfiguration {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/register", "/login").permitAll()
                         .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/admin/**").authenticated()
 
 
                 )

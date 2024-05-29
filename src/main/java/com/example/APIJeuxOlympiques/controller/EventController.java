@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/event")
+@RequestMapping("admin/event")
 public class EventController {
     private final EventService eventService;
     @Autowired
