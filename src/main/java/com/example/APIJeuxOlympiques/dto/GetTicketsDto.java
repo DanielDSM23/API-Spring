@@ -6,9 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class OrderTicketDto {
-    private String id_ticket;
+public class GetTicketsDto {
+
     private String id_user;
-    private String id_event;
-    private int quantity;
 }

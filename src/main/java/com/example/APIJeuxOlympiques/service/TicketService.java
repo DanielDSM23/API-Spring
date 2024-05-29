@@ -1,6 +1,7 @@
 package com.example.APIJeuxOlympiques.service;
 
 
+import com.example.APIJeuxOlympiques.dto.GetTicketsDto;
 import com.example.APIJeuxOlympiques.dto.OrderTicketDto;
 import com.example.APIJeuxOlympiques.model.Event;
 import com.example.APIJeuxOlympiques.model.Ticket;
@@ -9,20 +10,16 @@ import com.example.APIJeuxOlympiques.repository.EventRepository;
 import com.example.APIJeuxOlympiques.repository.TicketRepository;
 import com.example.APIJeuxOlympiques.repository.UserRepository;
 import com.example.APIJeuxOlympiques.response.OrderResponse;
-import com.example.APIJeuxOlympiques.response.SignInResponse;
+import com.example.APIJeuxOlympiques.response.StatusReponse;
 import com.example.APIJeuxOlympiques.security.config.AuthService;
 import com.example.APIJeuxOlympiques.security.config.JwtService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -47,10 +44,23 @@ public class TicketService {
                 finalPrice = finalPrice - (finalPrice * 0.1);
             }
             ticketRepository.save(new Ticket(event.get(), user.get(), orderTicketDto.getQuantity(), LocalDateTime.now(),finalPrice));
-            return new ResponseEntity<OrderResponse>(new OrderResponse("Ticket ordered", finalPrice), HttpStatus.OK);
+            return new ResponseEntity<>(new OrderResponse("Ticket ordered", finalPrice), HttpStatus.OK);
         }
         else{
-            return new ResponseEntity<OrderResponse>(new OrderResponse("Please specify correct values", null), HttpStatus.OK);
+            return new ResponseEntity<>(new OrderResponse("Please specify correct values", null), HttpStatus.OK);
         }
+    }
+
+    public List<Ticket> getAllOrders(){
+        return ticketRepository.findAll();
+    }
+
+    public ResponseEntity<?> deleteOrder(String id){
+        ticketRepository.deleteById(id);
+        if(ticketRepository.findById(id).isPresent()){
+            return new ResponseEntity<>(new StatusReponse("Error"), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new StatusReponse("Element deleted with success"), HttpStatus.OK);
+
     }
 }
