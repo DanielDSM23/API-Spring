@@ -14,8 +14,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -23,10 +26,12 @@ public class UserService implements UserDetailsService {
 
     private final AuthService authenticationService;
     private final UserRepository userRepo;
+    private PasswordEncoder passwordEncoder;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private final JwtService jwtService;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username){
@@ -56,4 +61,37 @@ public class UserService implements UserDetailsService {
 
         return new ResponseEntity<SignInResponse>(new SignInResponse(jwtToken), HttpStatus.OK);
     }
+
+    public Optional<User> getUserById(String userId){
+        return userRepository.findById(userId);
+    }
+
+    public List<User> getAllUsers(){
+        return userRepo.findAll();
+    }
+
+    public ResponseEntity<?> updateUser(String userId, String fullName, String email, String password) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setFullName(fullName);
+            user.setEmail(email);
+            user.setPassword(passwordEncoder.encode(password));
+            userRepository.save(user);
+            return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public ResponseEntity<?> deleteUser(String userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if(userOptional.isPresent()){
+            userRepository.delete(userOptional.get());
+            return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

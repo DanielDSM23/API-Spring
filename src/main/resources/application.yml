@@ -17,9 +17,9 @@ spring:
       name: TEST
       password: 12345
   datasource:
-    password: root
-    url: jdbc:mysql://localhost:8889/apijo
-    username: root
+    password: 2Q3exXr226KgnH
+    url: jdbc:mysql://mysql-mathis.alwaysdata.net/mathis_apijo
+    username: mathis_
   jpa:
     hibernate:
       ddl-auto: update
