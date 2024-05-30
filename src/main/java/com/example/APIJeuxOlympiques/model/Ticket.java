@@ -4,11 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDateTime;
-
-
 
 @Entity
 @Table(name = "ticket")
@@ -26,15 +23,12 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
-
+    @JsonBackReference(value = "event-ticket")
     private Event event;
 
     private Integer quantity;
-
     private LocalDateTime date;
-
     private Double finalPrice;
-
 
     public Ticket() {}
 
@@ -45,5 +39,4 @@ public class Ticket {
         this.date = date;
         this.finalPrice = finalPrice;
     }
-
 }
