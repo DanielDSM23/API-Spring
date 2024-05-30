@@ -1,10 +1,14 @@
 package com.example.APIJeuxOlympiques.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "event")
 @Getter
@@ -20,6 +24,14 @@ public class Event {
     private String place;
     private Double price;
 
+    @OneToMany(mappedBy = "events", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "event-stadium")
+    private List<Stadium> stadiums = new ArrayList<>();
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "event-ticket")
+    private List<Ticket> tickets = new ArrayList<>();
+
     public Event(String eventName, LocalDateTime beginDate, LocalDateTime endDate, Boolean status, String place) {
         this.eventName = eventName;
         this.beginDate = beginDate;
@@ -29,8 +41,5 @@ public class Event {
     }
 
     public Event() {
-
     }
-
-
 }

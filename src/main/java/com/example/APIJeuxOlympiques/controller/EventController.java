@@ -5,6 +5,7 @@ import com.example.APIJeuxOlympiques.model.Event;
 import com.example.APIJeuxOlympiques.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +40,8 @@ public class EventController {
     }
 
     @DeleteMapping("{id}")
-    public void deleteEvent(@PathVariable String id){
-        eventService.deleteEvent(id);
+    public ResponseEntity<String> deleteEvent(@PathVariable String id) {
+        String message = eventService.deleteEvent(id);
+        return ResponseEntity.ok(message);
     }
 }

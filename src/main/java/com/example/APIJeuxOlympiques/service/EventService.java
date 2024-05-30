@@ -49,7 +49,14 @@ public class EventService {
                 }).orElseThrow(() -> new RuntimeException("Event not found"));
     }
 
-    public void deleteEvent(String id) {
-        eventRepository.deleteById(id);
+    public String deleteEvent(String id) {
+        if (eventRepository.existsById(id)) {
+            eventRepository.deleteById(id);
+            logger.info("Event with ID {} deleted successfully", id);
+            return "Event deleted successfully";
+        } else {
+            logger.warn("Event with ID {} not found", id);
+            return "Event not found";
+        }
     }
 }
