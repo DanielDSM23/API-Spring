@@ -30,20 +30,30 @@ public class TicketService {
     private final UserRepository userRepository;
 
     public ResponseEntity<OrderResponse> orderTicket(OrderTicketDto orderTicketDto) {
-        Optional<Event> event = eventRepository.findById(orderTicketDto.getId_event());
-        Optional<User> user = userRepository.findById(orderTicketDto.getId_user());
-        boolean isEventExisting = event.isPresent();
-        boolean isUserExisting = user.isPresent();
-        if (isEventExisting && isUserExisting) {
-            double finalPrice = orderTicketDto.getQuantity() * event.get().getPrice();
-            if (orderTicketDto.getQuantity() >= 10) { // reduction in case of a lot of quantity
-                finalPrice = finalPrice - (finalPrice * 0.1);
-            }
-            ticketRepository.save(new Ticket(event.get(), user.get(), orderTicketDto.getQuantity(), LocalDateTime.now(), finalPrice));
-            return new ResponseEntity<>(new OrderResponse("Ticket ordered", finalPrice), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(new OrderResponse("Please specify correct values", null), HttpStatus.OK);
+        Optional<Event> eventOptional = eventRepository.findById(orderTicketDto.getId_event());
+        Optional<User> userOptional = userRepository.findById(orderTicketDto.getId_user());
+
+        if (eventOptional.isEmpty() || userOptional.isEmpty()) {
+            return new ResponseEntity<>(new OrderResponse("Please specify correct values", null), HttpStatus.BAD_REQUEST);
         }
+
+        Event event = eventOptional.get();
+        User user = userOptional.get();
+
+        List<Ticket> userTickets = ticketRepository.findByUser(user);
+        for (Ticket userTicket : userTickets) {
+            if (userTicket.getEvent().getBeginDate().toLocalDate().equals(event.getBeginDate().toLocalDate())) {
+                return new ResponseEntity<>(new OrderResponse("User already has a ticket for an event on this date", null), HttpStatus.CONFLICT);
+            }
+        }
+
+        double finalPrice = orderTicketDto.getQuantity() * event.getPrice();
+        if (orderTicketDto.getQuantity() >= 10) {
+            finalPrice = finalPrice - (finalPrice * 0.1);
+        }
+
+        ticketRepository.save(new Ticket(event, user, orderTicketDto.getQuantity(), LocalDateTime.now(), finalPrice));
+        return new ResponseEntity<>(new OrderResponse("Ticket ordered", finalPrice), HttpStatus.OK);
     }
 
     public List<Ticket> getAllTickets() {
