@@ -1,5 +1,6 @@
 # API Spring - Jeux Olympiques
 
+### Noms des étudiants : BOULAIS Mathis, MONTEIRO Daniel.
 
 ## Swagger
 - **documentation swagger**: [ici](https://app.swaggerhub.com/apis-docs/Daniel:VRDX/Spring-Api/1.0.0)
